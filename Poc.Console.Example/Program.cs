@@ -26,6 +26,8 @@ namespace Poc.ConsoleExample
             var signalRConnection = new SignalRConnection(MyID, MyTennantId, urlHub, _iconfiguration);  // #progress
             await signalRConnection.Start();
             #endregion
+            await Task.Delay(Timeout.Infinite);
+
         }
 
 

@@ -34,12 +34,12 @@ public class SignalRConnection
             // receive a message from the hub
             connection.On<string, string, string>("callMessage", OnReceiveMessage);
 
-            Console.WriteLine($"Connecting to the hub - {connection.ConnectionId}");
 
             await connection.StartAsync();
 
+            Console.WriteLine($"Connecting to the hub - {connection.ConnectionId}");
             // send a message to the hub
-            await connection.InvokeAsync("callMessage", _myTennantId, _myID.ToString(), connection.ConnectionId);
+            await connection.InvokeAsync("SendAll", _myTennantId, _myID.ToString(), connection.ConnectionId);
         }
         catch (Exception ex)
         {
