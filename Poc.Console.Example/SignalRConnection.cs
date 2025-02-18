@@ -55,6 +55,10 @@ public class SignalRConnection
             {
                 Console.WriteLine($"Message to me or Everyone from my tenant  {message}, totemId: {user}, tennantID: {tennantId}");
             }
+            else
+            {
+                Console.WriteLine($"Message to another user from another tenant {message}, totemId: {user}, tennantID: {tennantId}");
+            }
         }
         catch (Exception ex)
         {
