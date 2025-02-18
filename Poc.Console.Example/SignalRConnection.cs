@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace Poc.ConsoleExample;
 
@@ -39,7 +40,7 @@ public class SignalRConnection
 
             Console.WriteLine($"Connecting to the hub - {connection.ConnectionId}");
             // send a message to the hub
-            await connection.InvokeAsync("SendAll", _myTennantId, _myID.ToString(), connection.ConnectionId);
+            await connection.InvokeAsync("SendAll", _myTennantId, _myID.ToString(),"Hiii Frieeend");
         }
         catch (Exception ex)
         {
@@ -57,7 +58,14 @@ public class SignalRConnection
             }
             else
             {
-                Console.WriteLine($"Message to another user from another tenant {message}, totemId: {user}, tennantID: {tennantId}");
+                var obj = JsonSerializer.Deserialize<InfoTotemforChatApp>(message);
+                Console.WriteLine($"IP Cam {obj.UrlCam}");
+                Console.WriteLine($"IP URL TOTEM {obj.UrlTotem}");
+                var ipTotem = obj.UrlTotem;
+                if(ipTotem == "192.168.1.13")
+                {
+                    ipTotem = "172.255.21.21";//change for the correct IP
+                }
             }
         }
         catch (Exception ex)
